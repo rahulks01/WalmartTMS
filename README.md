@@ -55,7 +55,7 @@ The system includes three types of users: Admin, Driver, and Trailer Manager, ea
 
 ```bash
   env\Scripts\activate      (On Windows)
-  source venv/bin/activate  (On MacOS / Linux)
+  source env/bin/activate  (On MacOS / Linux)
 ````
 
 - Install dependencies
