@@ -6,7 +6,7 @@ The Walmart Trailer Management System is a web-based application built using Dja
 ## About WalmartTMS
 The system includes three types of users: Admin, Driver, and Trailer Manager, each with distinct roles and access to specific features.
 
-- Admin Dashboard
+- <h4>Admin Dashboard</h4>
 
     Pending Consignments: View and allocate trucks and drivers to pending consignments.
 
@@ -19,13 +19,13 @@ The system includes three types of users: Admin, Driver, and Trailer Manager, ea
 
     Feedback/Issues: Address feedback or issues submitted by drivers or trailer managers.
 
-- Driver Dashboard
+- <h4>Driver Dashboard</h4>
 
     Trip Allocation: View assigned trips along with trailer details and necessary paperwork.
 
     General Information: Access personal information such as salary, rating, and work history.
 
-- Trailer Manager Dashboard
+- <h4>Trailer Manager Dashboard</h4>
 
     Application Process: Submit a form including rental service quotation parameters.
 
