@@ -86,10 +86,10 @@ def admin_dashboard(request):
             rental_request.delete()
     return render(request, 'core/admin_dashboard.html', {'pending_requests': pending_requests})
 
-@login_required
+
 def driver_dashboard(request):
     return render(request, 'core/driver_dashboard.html')
 
-@login_required
+
 def renter_dashboard(request):
     return render(request, 'core/renter_dashboard.html')

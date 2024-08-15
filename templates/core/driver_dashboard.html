@@ -1,16 +1,703 @@
-<!DOCTYPE html>
-<html lang="en">
+{% comment %} <!DOCTYPE html>
+{% load static %}
+<html lang="en" class="light-style layout-menu-fixed layout-compact" data-assets-path="/static/" data-base-url="" data-framework="django" data-template="vertical-menu-free">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMS | Driver</title>
+    <title>Walmart | Driver Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="Driver Dashboard for managing driver details and assignments in Walmart's trailer management system." />
+    <meta name="keywords" content="driver dashboard, trailer management, Walmart" />
+
+    <!-- Include the styles partial -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="/static/src/assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/static/src/assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="/static/src/assets/vendor/css/theme-default.css" />
+    <link rel="stylesheet" href="/static/src/assets/css/demo.css" />
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/static/src/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+    <!-- Include the scripts partial (required) -->
+    <script src="/static/src/assets/vendor/js/helpers.js"></script>
+    <script src="/static/src/assets/js/config.js"></script>
 </head>
+
 <body>
-    <h1>This is the Driver Dashboard</h1>
-    <br>
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-</body>
-</html>
+    <!-- Layout wrapper: Start -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu: Start -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="/" class="app-brand-link">
+                        <img style="display: block; width: 150px;" src="{% static 'img/logo.svg' %}" alt="Company Logo" />
+                    </a>
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                </div>
+                <div class="menu-inner-shadow"></div>
+                <ul class="menu-inner py-1">
+                    <li class="menu-item">
+                        <a href="/" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div class="text-truncate" data-i18n="Dashboards">Home</div>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="javascript:void(0);" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-truck"></i>
+                            <div class="text-truncate" data-i18n="Drivers">Drivers</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <!-- Menu: End -->
+
+            <!-- Layout page: Start -->
+            <div class="layout-page">
+                <!-- Navbar: Start -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <div class="navbar-nav align-items-center">
+                            Driver Dashboard
+                        </div>
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <li class="nav-item lh-1 me-3">
+                                <form method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-sm btn-outline-dark" type="submit">Logout</button>
+                                </form>
+                            </li>
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-medium d-block">John Doe</span>
+                                                    <small class="text-muted">Driver</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <span class="d-flex align-items-center align-middle">
+                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                                <span class="flex-grow-1 align-middle ms-1">Billing</span>
+                                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="bx bx-power-off me-2"></i>
+                                            <span class="align-middle">Log Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Navbar: End -->
+
+                <!-- Content wrapper: Start -->
+                <div class="content-wrapper">
+                    <!-- Content: Start -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="row">
+                            <div class="col-lg-12 mb-4">
+                                <div class="card">
+                                    <div class="d-flex align-items-end row">
+                                        <div class="col-sm-12">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-primary">Driver Details</h5>
+                                                <p><strong>Name:</strong> {{ driver.name }}</p>
+                                                <p><strong>Phone No:</strong> {{ driver.phone_no }}</p>
+                                                <p><strong>Registration Place:</strong> {{ driver.registration_place }}</p>
+                                                <p><strong>Aadhaar:</strong> {{ driver.aadhaar }}</p>
+                                                <p><strong>Age:</strong> {{ driver.age }}</p>
+                                                <p><strong>Truck:</strong> {{ driver.truck }}</p>
+                                                <p><strong>Salary:</strong> {{ driver.salary }}</p>
+                                                <p><strong>Joining Date:</strong> {{ driver.joining_date }}</p>
+                                                <p><strong>Address:</strong> {{ driver.address }}</p>
+                                                <p><strong>Driver ID:</strong> {{ driver.driver_id }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content: End -->
+
+                    <!-- Footer: Start -->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                © 2024 {% endcomment %}
+
+
+                                {% comment %} <!DOCTYPE html>
+                                {% load static %}
+                                <html lang="en" class="light-style layout-menu-fixed layout-compact" data-assets-path="/static/" data-base-url="" data-framework="django" data-template="vertical-menu-free">
+                                
+                                <head>
+                                    <title>Walmart | Driver Dashboard</title>
+                                    <meta charset="utf-8" />
+                                    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+                                    <meta name="description" content="Driver Dashboard for managing driver details and assignments in Walmart's trailer management system." />
+                                    <meta name="keywords" content="driver dashboard, trailer management, Walmart" />
+                                
+                                    <!-- Include the styles partial -->
+                                    <!-- Fonts -->
+                                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                                    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+                                
+                                    <!-- Icons -->
+                                    <link rel="stylesheet" href="/static/src/assets/vendor/fonts/boxicons.css" />
+                                
+                                    <!-- Core CSS -->
+                                    <link rel="stylesheet" href="/static/src/assets/vendor/css/core.css" />
+                                    <link rel="stylesheet" href="/static/src/assets/vendor/css/theme-default.css" />
+                                    <link rel="stylesheet" href="/static/src/assets/css/demo.css" />
+                                
+                                    <!-- Vendor CSS -->
+                                    <link rel="stylesheet" href="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+                                    <link rel="stylesheet" href="/static/src/assets/vendor/libs/apex-charts/apex-charts.css" />
+                                
+                                    <!-- Page CSS -->
+                                    <!-- Include the scripts partial (required) -->
+                                    <script src="/static/src/assets/vendor/js/helpers.js"></script>
+                                    <script src="/static/src/assets/js/config.js"></script>
+                                </head>
+                                
+                                <body>
+                                    <!-- Layout wrapper: Start -->
+                                    <div class="layout-wrapper layout-content-navbar">
+                                        <div class="layout-container">
+                                            <!-- Menu: Start -->
+                                            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                                                <div class="app-brand demo">
+                                                    <a href="/" class="app-brand-link">
+                                                        <img style="display: block; width: 150px;" src="{% static 'img/logo.svg' %}" alt="Company Logo" />
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                                                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-inner-shadow"></div>
+                                                <ul class="menu-inner py-1">
+                                                    <li class="menu-item">
+                                                        <a href="/" class="menu-link">
+                                                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                                            <div class="text-truncate" data-i18n="Dashboards">Home</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="menu-item active">
+                                                        <a href="javascript:void(0);" class="menu-link">
+                                                            <i class="menu-icon tf-icons bx bx-truck"></i>
+                                                            <div class="text-truncate" data-i18n="Drivers">Drivers</div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </aside>
+                                            <!-- Menu: End -->
+                                
+                                            <!-- Layout page: Start -->
+                                            <div class="layout-page">
+                                                <!-- Navbar: Start -->
+                                                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                                                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                                                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                                                            <i class="bx bx-menu bx-sm"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                                                        <div class="navbar-nav align-items-center">
+                                                            Driver Dashboard
+                                                        </div>
+                                                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                                                            <li class="nav-item lh-1 me-3">
+                                                                <form method="post" action="{% url 'logout' %}">
+                                                                    {% csrf_token %}
+                                                                    <button class="btn btn-sm btn-outline-dark" type="submit">Logout</button>
+                                                                </form>
+                                                            </li>
+                                                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                                                    <div class="avatar avatar-online">
+                                                                        <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                                                    </div>
+                                                                </a>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li>
+                                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                                            <div class="d-flex">
+                                                                                <div class="flex-shrink-0 me-3">
+                                                                                    <div class="avatar avatar-online">
+                                                                                        <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="flex-grow-1">
+                                                                                    <span class="fw-medium d-block">John Doe</span>
+                                                                                    <small class="text-muted">Driver</small>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="dropdown-divider"></div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                                            <i class="bx bx-user me-2"></i>
+                                                                            <span class="align-middle">My Profile</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                                            <i class="bx bx-cog me-2"></i>
+                                                                            <span class="align-middle">Settings</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                                            <span class="d-flex align-items-center align-middle">
+                                                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                                                                <span class="flex-grow-1 align-middle ms-1">Billing</span>
+                                                                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="dropdown-divider"></div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                                            <i class="bx bx-power-off me-2"></i>
+                                                                            <span class="align-middle">Log Out</span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </nav>
+                                                <!-- Navbar: End -->
+                                
+                                                <!-- Content wrapper: Start -->
+                                                <div class="content-wrapper">
+                                                    <!-- Content: Start -->
+                                                    <div class="container-xxl flex-grow-1 container-p-y">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 mb-4">
+                                                                <div class="card">
+                                                                    <div class="d-flex align-items-end row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-primary">Driver Details</h5>
+                                                                                <p><strong>Name:</strong> John Doe</p>
+                                                                                <p><strong>Phone No:</strong> +1 234 567 8901</p>
+                                                                                <p><strong>Registration Place:</strong> New York</p>
+                                                                                <p><strong>Aadhaar:</strong> 1234 5678 9101</p>
+                                                                                <p><strong>Age:</strong> 34</p>
+                                                                                <p><strong>Truck:</strong> Volvo FH</p>
+                                                                                <p><strong>Salary:</strong> $75,000</p>
+                                                                                <p><strong>Joining Date:</strong> 2020-06-15</p>
+                                                                                <p><strong>Address:</strong> 123 Elm Street, New York, NY 10001</p>
+                                                                                <p><strong>Driver ID:</strong> D-001234</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- / Content: End -->
+                                
+                                                    <!-- Footer: Start -->
+                                                    <footer class="content-footer footer bg-footer-theme">
+                                                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                                                            <div class="mb-2 mb-md-0">
+                                                                © 2024 Walmart Inc.
+                                                            </div>
+                                                            <div>
+                                                                <a href="javascript:void(0);" class="footer-link me-4">Privacy</a>
+                                                                <a href="javascript:void(0);" class="footer-link me-4">Terms</a>
+                                                                <a href="javascript:void(0);" class="footer-link me-4">Contact</a>
+                                                            </div>
+                                                        </div>
+                                                    </footer>
+                                                    <!-- Footer: End -->
+                                                </div>
+                                                <!-- Content wrapper: End -->
+                                            </div>
+                                            <!-- Layout page: End -->
+                                        </div>
+                                    </div>
+                                
+                                    <!-- Core JS -->
+                                    <script src="/static/src/assets/vendor/libs/jquery/jquery.js"></script>
+                                    <script src="/static/src/assets/vendor/libs/popper/popper.js"></script>
+                                    <script src="/static/src/assets/vendor/js/bootstrap.js"></script>
+                                    <script src="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+                                    <script src="/static/src/assets/vendor/js/menu.js"></script>
+                                
+                                    <!-- Vendors JS -->
+                                    <script src="/static/src/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+                                
+                                    <!-- Main JS -->
+                                    <script src="/static/src/assets/js/main.js"></script>
+                                
+                                    <!-- Page JS -->
+                                    <script src="/static/src/assets/js/dashboards-analytics.js"></script>
+                                </body>
+                                </html>
+                                 {% endcomment %}
+
+
+                                 <!DOCTYPE html>
+                                 {% load static %}
+                                 <html lang="en" class="light-style layout-menu-fixed layout-compact" data-assets-path="/static/" data-base-url="" data-framework="django" data-template="vertical-menu-free">
+                                 
+                                 <head>
+                                     <title>Walmart | Driver Dashboard</title>
+                                     <meta charset="utf-8" />
+                                     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+                                     <meta name="description" content="Driver Dashboard for managing driver details and assignments in Walmart's trailer management system." />
+                                     <meta name="keywords" content="driver dashboard, trailer management, Walmart" />
+                                 
+                                     <!-- Include the styles partial -->
+                                     <!-- Fonts -->
+                                     <link rel="preconnect" href="https://fonts.googleapis.com">
+                                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                                     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+                                 
+                                     <!-- Icons -->
+                                     <link rel="stylesheet" href="/static/src/assets/vendor/fonts/boxicons.css" />
+                                 
+                                     <!-- Core CSS -->
+                                     <link rel="stylesheet" href="/static/src/assets/vendor/css/core.css" />
+                                     <link rel="stylesheet" href="/static/src/assets/vendor/css/theme-default.css" />
+                                     <link rel="stylesheet" href="/static/src/assets/css/demo.css" />
+                                 
+                                     <!-- Vendor CSS -->
+                                     <link rel="stylesheet" href="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+                                     <link rel="stylesheet" href="/static/src/assets/vendor/libs/apex-charts/apex-charts.css" />
+                                 
+                                     <!-- Page CSS -->
+                                     <!-- Include the scripts partial (required) -->
+                                     <script src="/static/src/assets/vendor/js/helpers.js"></script>
+                                     <script src="/static/src/assets/js/config.js"></script>
+                                 </head>
+                                 
+                                 <body>
+                                     <!-- Layout wrapper: Start -->
+                                     <div class="layout-wrapper layout-content-navbar">
+                                         <div class="layout-container">
+                                             <!-- Menu: Start -->
+                                             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                                                 <div class="app-brand demo">
+                                                     <a href="/" class="app-brand-link">
+                                                         <img style="display: block; width: 150px;" src="{% static 'img/logo.svg' %}" alt="Company Logo" />
+                                                     </a>
+                                                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                                                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                                                     </a>
+                                                 </div>
+                                                 <div class="menu-inner-shadow"></div>
+                                                 <ul class="menu-inner py-1">
+                                                     <li class="menu-item">
+                                                         <a href="/" class="menu-link">
+                                                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                                             <div class="text-truncate" data-i18n="Dashboards">Home</div>
+                                                         </a>
+                                                     </li>
+                                                     <li class="menu-item active">
+                                                         <a href="javascript:void(0);" class="menu-link">
+                                                             <i class="menu-icon tf-icons bx bx-truck"></i>
+                                                             <div class="text-truncate" data-i18n="Drivers">Drivers</div>
+                                                         </a>
+                                                     </li>
+                                                 </ul>
+                                             </aside>
+                                             <!-- Menu: End -->
+                                 
+                                             <!-- Layout page: Start -->
+                                             <div class="layout-page">
+                                                 <!-- Navbar: Start -->
+                                                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                                                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                                                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                                                             <i class="bx bx-menu bx-sm"></i>
+                                                         </a>
+                                                     </div>
+                                                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                                                         <div class="navbar-nav align-items-center">
+                                                             Driver Dashboard
+                                                         </div>
+                                                         <ul class="navbar-nav flex-row align-items-center ms-auto">
+                                                             <li class="nav-item lh-1 me-3">
+                                                                 <form method="post" action="{% url 'logout' %}">
+                                                                     {% csrf_token %}
+                                                                     <button class="btn btn-sm btn-outline-dark" type="submit">Logout</button>
+                                                                 </form>
+                                                             </li>
+                                                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                                                     <div class="avatar avatar-online">
+                                                                         <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                                                     </div>
+                                                                 </a>
+                                                                 <ul class="dropdown-menu dropdown-menu-end">
+                                                                     <li>
+                                                                         <a class="dropdown-item" href="javascript:void(0);">
+                                                                             <div class="d-flex">
+                                                                                 <div class="flex-shrink-0 me-3">
+                                                                                     <div class="avatar avatar-online">
+                                                                                         <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                                                                     </div>
+                                                                                 </div>
+                                                                                 <div class="flex-grow-1">
+                                                                                     <span class="fw-medium d-block">John Doe</span>
+                                                                                     <small class="text-muted">Driver</small>
+                                                                                 </div>
+                                                                             </div>
+                                                                         </a>
+                                                                     </li>
+                                                                     <li>
+                                                                         <div class="dropdown-divider"></div>
+                                                                     </li>
+                                                                     <li>
+                                                                         <a class="dropdown-item" href="javascript:void(0);">
+                                                                             <i class="bx bx-user me-2"></i>
+                                                                             <span class="align-middle">My Profile</span>
+                                                                         </a>
+                                                                     </li>
+                                                                     <li>
+                                                                         <a class="dropdown-item" href="javascript:void(0);">
+                                                                             <i class="bx bx-cog me-2"></i>
+                                                                             <span class="align-middle">Settings</span>
+                                                                         </a>
+                                                                     </li>
+                                                                     <li>
+                                                                         <a class="dropdown-item" href="javascript:void(0);">
+                                                                             <span class="d-flex align-items-center align-middle">
+                                                                                 <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                                                                 <span class="flex-grow-1 align-middle ms-1">Billing</span>
+                                                                                 <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                                                             </span>
+                                                                         </a>
+                                                                     </li>
+                                                                     <li>
+                                                                         <div class="dropdown-divider"></div>
+                                                                     </li>
+                                                                     <li>
+                                                                         <a class="dropdown-item" href="javascript:void(0);">
+                                                                             <i class="bx bx-power-off me-2"></i>
+                                                                             <span class="align-middle">Log Out</span>
+                                                                         </a>
+                                                                     </li>
+                                                                 </ul>
+                                                             </li>
+                                                         </ul>
+                                                     </div>
+                                                 </nav>
+                                                 <!-- Navbar: End -->
+                                 
+                                                 <!-- Content wrapper: Start -->
+                                                 <div class="content-wrapper">
+                                                     <!-- Content: Start -->
+                                                     <div class="container-xxl flex-grow-1 container-p-y">
+                                                         <div class="row">
+                                                             <div class="col-lg-12 mb-4">
+                                                                 <div class="card">
+                                                                     <div class="d-flex align-items-end row">
+                                                                         <div class="col-sm-7">
+                                                                             <div class="card-body">
+                                                                                 <h5 class="card-title text-primary">Driver Details</h5>
+                                                                                 <p><strong>Name:</strong> John Doe</p>
+                                                                                 <p><strong>Phone No:</strong> +1 234 567 8901</p>
+                                                                                 <p><strong>Registration Place:</strong> New York</p>
+                                                                                 <p><strong>Aadhaar:</strong> 1234 5678 9101</p>
+                                                                                 <p><strong>Age:</strong> 34</p>
+                                                                                 <p><strong>Truck:</strong> Volvo FH</p>
+                                                                                 <p><strong>Salary:</strong> $75,000</p>
+                                                                                 <p><strong>Joining Date:</strong> 2020-06-15</p>
+                                                                                 <p><strong>Address:</strong> 123 Elm Street, New York, NY 10001</p>
+                                                                                 <p><strong>Driver ID:</strong> D-001234</p>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                 
+                                                         <!-- Upcoming Trip Requests Section -->
+                                                         <div class="row">
+                                                             <div class="col-lg-12 mb-4">
+                                                                 <div class="card">
+                                                                     <div class="d-flex align-items-end row">
+                                                                         <div class="col-sm-12">
+                                                                             <div class="card-body">
+                                                                                 <h5 class="card-title text-primary">Upcoming Trip Requests</h5>
+                                                                                 <div class="table-responsive">
+                                                                                     <table class="table table-bordered">
+                                                                                         <thead>
+                                                                                             <tr>
+                                                                                                 <th>Request ID</th>
+                                                                                                 <th>Pickup Location</th>
+                                                                                                 <th>Destination</th>
+                                                                                                 <th>Scheduled Date</th>
+                                                                                                 <th>Status</th>
+                                                                                                 <th>Actions</th>
+                                                                                             </tr>
+                                                                                         </thead>
+                                                                                         <tbody>
+                                                                                             <tr>
+                                                                                                 <td>TR-12345</td>
+                                                                                                 <td>Toronto</td>
+                                                                                                 <td>Vancouver</td>
+                                                                                                 <td>2024-08-20</td>
+                                                                                                 <td>Scheduled</td>
+                                                                                                 <td>
+                                                                                                     <button class="btn btn-success btn-sm">Accept</button>
+                                                                                                     <button class="btn btn-danger btn-sm">Reject</button>
+                                                                                                 </td>
+                                                                                             </tr>
+                                                                                             <tr>
+                                                                                                 <td>TR-12346</td>
+                                                                                                 <td>Los Angeles</td>
+                                                                                                 <td>San Francisco</td>
+                                                                                                 <td>2024-08-21</td>
+                                                                                                 <td>Scheduled</td>
+                                                                                                 <td>
+                                                                                                     <button class="btn btn-success btn-sm">Accept</button>
+                                                                                                     <button class="btn btn-danger btn-sm">Reject</button>
+                                                                                                 </td>
+                                                                                             </tr>
+                                                                                             <!-- Add more rows as needed -->
+                                                                                         </tbody>
+                                                                                     </table>
+                                                                                 </div>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                 
+                                                         <!-- Recent Activity Section -->
+                                                         <div class="row">
+                                                             <div class="col-lg-12 mb-4">
+                                                                 <div class="card">
+                                                                     <div class="d-flex align-items-end row">
+                                                                         <div class="col-sm-12">
+                                                                             <div class="card-body">
+                                                                                 <h5 class="card-title text-primary">Recent Activity</h5>
+                                                                                 <div class="table-responsive">
+                                                                                     <table class="table table-bordered">
+                                                                                         <thead>
+                                                                                             <tr>
+                                                                                                 <th>Trip ID</th>
+                                                                                                 <th>Status</th>
+                                                                                             </tr>
+                                                                                         </thead>
+                                                                                         <tbody>
+                                                                                             <tr>
+                                                                                                 <td>TR-12345</td>
+                                                                                                 <td>Completed</td>
+                                                                                             </tr>
+                                                                                             <tr>
+                                                                                                 <td>TR-12344</td>
+                                                                                                 <td>Delayed</td>
+                                                                                             </tr>
+                                                                                             <tr>
+                                                                                                 <td>TR-12343</td>
+                                                                                                 <td>Completed</td>
+                                                                                             </tr>
+                                                                                             <!-- Add more rows as needed -->
+                                                                                         </tbody>
+                                                                                     </table>
+                                                                                 </div>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                 
+                                                     </div>
+                                                     <!-- Content: End -->
+                                                 </div>
+                                                 <!-- Content wrapper: End -->
+                                             </div>
+                                             <!-- Layout page: End -->
+                                         </div>
+                                     </div>
+                                     <!-- Layout wrapper: End -->
+                                 
+                                     <!-- Core JS -->
+                                     <script src="/static/src/assets/vendor/libs/jquery/jquery.js"></script>
+                                     <script src="/static/src/assets/vendor/libs/popper/popper.js"></script>
+                                     <script src="/static/src/assets/vendor/js/bootstrap.js"></script>
+                                     <script src="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+                                     <script src="/static/src/assets/vendor/js/menu.js"></script>
+                                 
+                                     <!-- Vendors JS -->
+                                     <script src="/static/src/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+                                 
+                                     <!-- Main JS -->
+                                     <script src="/static/src/assets/js/main.js"></script>
+                                 </body>
+                                 
+                                 </html>
+                                 

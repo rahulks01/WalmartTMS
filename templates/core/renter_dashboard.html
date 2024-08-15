@@ -1,16 +1,498 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="en" class="light-style layout-menu-fixed layout-compact" data-assets-path="/static/" data-base-url="" data-framework="django" data-template="vertical-menu-free">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMS | Renter</title>
+    <title>Renter Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="Renter Dashboard for managing rental details and agreements." />
+    <meta name="keywords" content="renter dashboard, rental management" />
+
+    <!-- Include the styles partial -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="/static/src/assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/static/src/assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="/static/src/assets/vendor/css/theme-default.css" />
+    <link rel="stylesheet" href="/static/src/assets/css/demo.css" />
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/static/src/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+    <!-- Include the scripts partial (required) -->
+    <script src="/static/src/assets/vendor/js/helpers.js"></script>
+    <script src="/static/src/assets/js/config.js"></script>
 </head>
+
 <body>
-    <h1>This is the Renter Dashboard</h1>
-    <br>
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
+    <!-- Layout wrapper: Start -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu: Start -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="/" class="app-brand-link">
+                        <img style="display: block; width: 150px;" src="{% static 'img/logo.svg' %}" alt="Company Logo" />
+                    </a>
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                </div>
+                <div class="menu-inner-shadow"></div>
+                <ul class="menu-inner py-1">
+                    <li class="menu-item">
+                        <a href="/" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div class="text-truncate" data-i18n="Dashboards">Home</div>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="javascript:void(0);" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-truck"></i>
+                            <div class="text-truncate" data-i18n="Renter">Renter</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <!-- Menu: End -->
+
+            <!-- Layout page: Start -->
+            <div class="layout-page">
+                <!-- Navbar: Start -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <div class="navbar-nav align-items-center">
+                            Renter Dashboard
+                        </div>
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <li class="nav-item lh-1 me-3">
+                                <form method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-sm btn-outline-dark" type="submit">Logout</button>
+                                </form>
+                            </li>
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-medium d-block">Jane Smith</span>
+                                                    <small class="text-muted">Renter</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <span class="d-flex align-items-center align-middle">
+                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                                                <span class="flex-grow-1 align-middle ms-1">Billing</span>
+                                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="bx bx-power-off me-2"></i>
+                                            <span class="align-middle">Log Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Navbar: End -->
+
+                <!-- Content wrapper: Start -->
+                <div class="content-wrapper">
+                    <!-- Content: Start -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="row">
+                            <div class="col-lg-12 mb-4">
+                                <div class="card">
+                                    <div class="d-flex align-items-end row">
+                                        <div class="col-sm-7">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-primary">Renter Details</h5>
+                                                <p><strong>Name/Company:</strong> ABC Logistics</p>
+                                                <p><strong>Address:</strong> 456 Maple Avenue, Toronto, ON M5A 1A1</p>
+                                                <p><strong>Phone No:</strong> +1 416 555 1234</p>
+                                                <p><strong>Location:</strong> Toronto</p>
+                                                <p><strong>Rental ID:</strong> R-001234</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       <!-- Trailers Rented Section -->
+<div class="row">
+    <div class="col-lg-12 mb-4">
+        <div class="card">
+            <div class="d-flex align-items-end row">
+                <div class="col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Trailers Rented</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Trailer ID</th>
+                                        <th>Trailer Name</th>
+                                        <th>Registration No</th>
+                                        <th>Status</th>
+                                        <th>Rental Period</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td> <!-- Example Trailer ID -->
+                                        <td>Trailer 1</td>
+                                        <td>ABC-1234</td>
+                                        <td>Pending</td>  <!-- Show status -->
+                                        <td>2024-08-01 to 2024-08-31</td>  <!-- Example rental period -->
+                                        <td>
+                                            <button class="btn btn-info btn-sm">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td> <!-- Example Trailer ID -->
+                                        <td>Trailer 2</td>
+                                        <td>XYZ-5678</td>
+                                        <td>Approved</td>  <!-- Example status -->
+                                        <td>2024-08-15 to 2024-09-15</td>  <!-- Example rental period -->
+                                        <td>
+                                            <button class="btn btn-info btn-sm">View</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+                        <!-- Add New Trailer Section -->
+<div class="row">
+    <div class="col-lg-12 mb-4">
+        <div class="card">
+            <div class="d-flex align-items-end row">
+                <div class="col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Add New Trailer</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="trailer-registration-no" class="form-label">Registration No</label>
+                                <input type="text" class="form-control" id="trailer-registration-no" placeholder="Enter Registration No" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-chassis-no" class="form-label">Chassis Number</label>
+                                <input type="text" class="form-control" id="trailer-chassis-no" placeholder="Enter Chassis Number" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-engine-no" class="form-label">Engine Number</label>
+                                <input type="text" class="form-control" id="trailer-engine-no" placeholder="Enter Engine Number" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-registration-date" class="form-label">Date of Registration</label>
+                                <input type="date" class="form-control" id="trailer-registration-date" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-rto" class="form-label">RTO</label>
+                                <input type="text" class="form-control" id="trailer-rto" placeholder="Enter RTO" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-insurance-date" class="form-label">Insurance Date</label>
+                                <input type="date" class="form-control" id="trailer-insurance-date" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-insurance-renewal-date" class="form-label">Insurance Renewal Date</label>
+                                <input type="date" class="form-control" id="trailer-insurance-renewal-date" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-pollution-renewal-date" class="form-label">Pollution Renewal Date</label>
+                                <input type="date" class="form-control" id="trailer-pollution-renewal-date" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-fuel-type" class="form-label">Fuel Type</label>
+                                <select id="trailer-fuel-type" class="form-select">
+                                    <option value="petrol">Petrol</option>
+                                    <option value="diesel">Diesel</option>
+                                    <option value="electric">Electric</option>
+                                    <!-- Add more options if needed -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="trailer-location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="trailer-location" placeholder="Enter Location for Handover" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Trailer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                        <!-- Total Revenue Generated Section -->
+<div class="row">
+    <div class="col-lg-12 mb-4">
+        <div class="card">
+            <div class="d-flex align-items-end row">
+                <div class="col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Total Revenue Generated</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="startDate" class="form-label">Start Date:</label>
+                                        <input type="date" class="form-control" id="startDate" name="startDate">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="endDate" class="form-label">End Date:</label>
+                                        <input type="date" class="form-control" id="endDate" name="endDate">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Generate Report</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Trailer Model</th>
+                                        <th>Rental Period</th>
+                                        <th>Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Freightliner Cascadia</td>
+                                        <td>Jan 2024 - Aug 2024</td>
+                                        <td>$12,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kenworth T680</td>
+                                        <td>Mar 2024 - Aug 2024</td>
+                                        <td>$8,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Peterbilt 579</td>
+                                        <td>Feb 2024 - Aug 2024</td>
+                                        <td>$10,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volvo VNL</td>
+                                        <td>May 2024 - Aug 2024</td>
+                                        <td>$9,200</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2" class="text-end">Total Revenue:</th>
+                                        <th>$39,700</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                        <!-- Agreement Renewal Alerts Section -->
+<div class="row">
+    <div class="col-lg-12 mb-4">
+        <div class="card">
+            <div class="d-flex align-items-end row">
+                <div class="col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Agreement Renewal Alerts</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Agency Name</th>
+                                        <th>Renewal Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Martino Logistics</td>
+                                        <td>2024-09-15</td>
+                                        <td>Pending</td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm">Renew Online</button>
+                                            <button class="btn btn-danger btn-sm">Decline Renewal</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>XYZ Transport</td>
+                                        <td>2024-10-01</td>
+                                        <td>Pending</td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm">Renew Online</button>
+                                            <button class="btn btn-danger btn-sm">Decline Renewal</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>LMN Haulers</td>
+                                        <td>2024-11-20</td>
+                                        <td>Pending</td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm">Renew Online</button>
+                                            <button class="btn btn-danger btn-sm">Decline Renewal</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                        <!-- Required Trailers Listing Section -->
+<div class="row">
+    <div class="col-lg-12 mb-4">
+        <div class="card">
+            <div class="d-flex align-items-end row">
+                <div class="col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Required Trailers at Locations</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Location</th>
+                                        <th>Trailer Type</th>
+                                        <th>Quantity Required</th>
+                                        <th>Actions</th> <!-- New column for actions -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>New York, NY</td>
+                                        <td>Refrigerated</td>
+                                        <td>5</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm">Add Trailer</button> <!-- Add Trailer Button -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Los Angeles, CA</td>
+                                        <td>Flatbed</td>
+                                        <td>3</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm">Add Trailer</button> <!-- Add Trailer Button -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                    </div>
+                    <!-- Content: End -->
+                </div>
+                <!-- Content wrapper: End -->
+
+                <!-- Footer: Start -->
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl">
+                        <div class="footer-to-top">
+                            <a href="javascript:void(0);" class="btn btn-icon btn-outline-secondary rounded-circle">
+                                <i class="bx bx-up-arrow-alt"></i>
+                            </a>
+                        </div>
+                        <div class="footer-bottom">
+                            <p class="mb-0 text-center">2024 &copy; Walmart. All rights reserved.</p>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Footer: End -->
+            </div>
+            <!-- Layout page: End -->
+        </div>
+    </div>
+    <!-- Layout wrapper: End -->
+
+    <!-- Core JS -->
+    <script src="/static/src/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/static/src/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/static/src/assets/vendor/js/bootstrap.js"></script>
+    <script src="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/static/src/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="/static/src/assets/js/main.js"></script>
+
 </body>
 </html>
