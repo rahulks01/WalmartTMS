@@ -83,7 +83,11 @@
     <div class="auth">
       <div class="nft box">
         <div class="main">
-          <img class="tokenImage" src="{% static 'img/ic_map.svg' %}" alt="NFT" />
+          <img
+            class="tokenImage"
+            src="{% static 'img/ic_map.svg' %}"
+            alt="NFT"
+          />
           <br />
           <div class="tokenInfo">
             <a class="btn btn-warning" href="{% url 'login' %}">LOGIN</a>
@@ -93,10 +97,16 @@
 
       <div class="nft">
         <div class="main box">
-          <img class="tokenImage" src="{% static 'img/ic_truck.svg' %}" alt="NFT" />
+          <img
+            class="tokenImage"
+            src="{% static 'img/ic_truck.svg' %}"
+            alt="NFT"
+          />
           <br />
           <div class="tokenInfo">
-            <a class="btn btn-warning" href="{% url 'rent_trailer' %}">RENT US A TRAILER</a>
+            <a class="btn btn-warning" href="{% url 'rent_trailer' %}"
+              >RENT US A TRAILER</a
+            >
           </div>
         </div>
       </div>

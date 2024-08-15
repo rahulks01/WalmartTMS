@@ -1,377 +1,529 @@
-
-
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" class="light-style layout-menu-fixed layout-compact" data-assets-path="/static/" data-base-url="" data-framework="django" data-template="vertical-menu-free">
 
-  <head>
-    <title>Walmart | Admin</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta name="description" content="Sneat is a modern, clean and fully responsive admin template built with Bootstrap 5, Django 5, HTML, CSS, and JavaScript. It has a huge collection of reusable UI components. It can be used for all types of web applications like System Error pages, Authentication pages, admin dashboard." />
-    <meta name="keywords" content="django, django admin, dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5" />
+<head>
+  <title>Walmart | Admin</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="Sneat is a modern, clean and fully responsive admin template built with Bootstrap 5, Django 5, HTML, CSS, and JavaScript. It has a huge collection of reusable UI components. It can be used for all types of web applications like System Error pages, Authentication pages, admin dashboard." />
+  <meta name="keywords" content="django, django admin, dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5" />
 
-    <!-- Include the styles partial -->
-    
+  <!-- Include the styles partial -->
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
-<!--Fonts-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/src/assets/vendor/fonts/boxicons.css" />
 
-<!-- Icons -->
-<link rel="stylesheet" href="/static/src/assets/vendor/fonts/boxicons.css" />
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="/static/src/assets/vendor/css/core.css" />
+  <link rel="stylesheet" href="/static/src/assets/vendor/css/theme-default.css" />
+  <link rel="stylesheet" href="/static/src/assets/css/demo.css" />
 
-<!--Core CSS -->
-<link rel="stylesheet" href="/static/src/assets/vendor/css/core.css" />
-<link rel="stylesheet" href="/static/src/assets/vendor/css/theme-default.css" />
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="/static/src/assets/vendor/libs/apex-charts/apex-charts.css" />
 
+  <!-- Page CSS -->
+  <!-- Include the scripts partial (required) -->
+  <script src="/static/src/assets/vendor/js/helpers.js"></script>
+  <script src="/static/src/assets/js/config.js"></script>
+  <style>
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    .list-group-item {
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+    }
+    .table thead th {
+      background-color: #f5f5f5;
+    }
+    .btn-custom {
+      font-weight: 500;
+    }
+    .filters, .search-bar {
+      margin-bottom: 20px;
+    }
+    .filters select, .search-bar input {
+      width: 100%;
+    }
+    .card-body {
+      padding: 1.5rem;
+    }
+    .table-responsive {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
 
-<link rel="stylesheet" href="/static/src/assets/css/demo.css" />
+<body>
+  <!-- Layout wrapper: Start -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
 
-<!--Vendor CSS-->
-<link rel="stylesheet" href="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-
-    
-
-<link rel="stylesheet" href="/static/src/assets/vendor/libs/apex-charts/apex-charts.css" />
-
-
-    <!--Page CSS-->
-    
-
-
-    <!-- Include the scripts partial (required ) -->
-    
-
-<!-- Helpers -->
-<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-<script src="/static/src/assets/vendor/js/helpers.js"></script>
-
-<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="/static/src/assets/js/config.js"></script>
-<!-- beautify ignore:start -->
-
-
-
-<!-- beautify ignore:end -->
-
-
-  </head>
-
-  <body>
-    <!-- beautify ignore:end -->
-
-    
-<!-- Layout wrapper: Start -->
-<div class="layout-wrapper layout-content-navbar ">
-  <div class="layout-container">
-
-    
-    <!-- Menu: Start -->
-    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-  <!-- ! Hide app brand if navbar-full -->
-  
-  <div class="app-brand demo">
-    <a href="/" class="app-brand-link">
-        <img style="display: block; width: 150px;" src="{% static 'img/logo.svg' %}" alt="Company Logo" />
-    </a>
-
-    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
-    </a>
-  </div>
-  
-
-
-  <div class="menu-inner-shadow"></div>
-
-  <ul class="menu-inner py-1">
-
-    <li class="menu-item active open">
-      <a href="javascript:void(0);" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-        <div class="text-truncate" data-i18n="Dashboards">Logistics</div>
-      </a>
-      
-  
-            
-          
-        
-      
-
-</aside>
-
-    <!-- Menu: End -->
-    
-
-    <!-- Layout page: Start -->
-    <div class="layout-page">
-
-
-      
-      <!-- Navbar: Start -->
-      
-
-
-
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-  
-  <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-      <i class="bx bx-menu bx-sm"></i>
-    </a>
-  </div>
-  
-  <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
-    <!-- Search -->
-    <div class="navbar-nav align-items-center">
-      Trailer Management System
-    </div>
-    <!-- /Search -->
-
-    <ul class="navbar-nav flex-row align-items-center ms-auto">
-      <!-- Place this tag where you want the button to render. -->
-      <li class="nav-item lh-1 me-3">
-        <form method="post" action="{% url 'logout' %}">
-          {% csrf_token %}
-          <button class="btn btn-sm btn-outline-dark" type="submit">Logout</button>
-      </form>
-      </li>
-
-      <!-- User -->
-      <li class="nav-item navbar-dropdown dropdown-user dropdown">
-        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-          <div class="avatar avatar-online">
-            <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
-          </div>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-              <div class="d-flex">
-                <div class="flex-shrink-0 me-3">
-                  <div class="avatar avatar-online">
-                    <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
-                  </div>
-                </div>
-                <div class="flex-grow-1">
-                  <span class="fw-medium d-block">John Doe</span>
-                  <small class="text-muted">Admin</small>
-                </div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-              <i class="bx bx-user me-2"></i>
-              <span class="align-middle">My Profile</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-              <i class="bx bx-cog me-2"></i>
-              <span class="align-middle">Settings</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-              <span class="d-flex align-items-center align-middle">
-                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-              </span>
-            </a>
-          </li>
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-              <i class="bx bx-power-off me-2"></i>
-              <span class="align-middle">Log Out</span>
+      <!-- Menu: Start -->
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <!-- ! Hide app brand if navbar-full -->
+        <div class="app-brand demo">
+          <a href="/" class="app-brand-link">
+            <img style="display: block; width: 150px;" src="{% static 'img/logo.svg' %}" alt="Company Logo" />
+          </a>
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+          </a>
+        </div>
+        <div class="menu-inner-shadow"></div>
+        <ul class="menu-inner py-1">
+          <li class="menu-item active open">
+            <a href="javascript:void(0);" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div class="text-truncate" data-i18n="Dashboards">Logistics</div>
             </a>
           </li>
         </ul>
-      </li>
-      <!--/ User -->
-    </ul>
-  </div>
-</nav>
+      </aside>
+      <!-- Menu: End -->
 
-      <!-- Navbar: End -->
-      
+      <!-- Layout page: Start -->
+      <div class="layout-page">
 
-
-      <!-- Content wrapper: Start -->
-      <div class="content-wrapper">
-        <!-- Content: Start -->
-        
-          <div class="container-xxl flex-grow-1 container-p-y">
-            
-            
-
-<div class="row">
-  <div class="col-lg-8 mb-4 order-0">
-    <div class="card">
-      <div class="d-flex align-items-end row">
-        <div class="col-sm-7">
-          <div class="card-body">
-            <h5 class="card-title text-primary">Pending Renter Approval</h5>
-            
-              {% for request in pending_requests %}
-                  <div class="mb-4">
-                      <strong>{{ request.owner_name }} from {{ request.company_name }}</strong><br>
-                      Contact: {{ request.contact_info }}<br>
-                      Trailer Details: {{ request.trailer_details }}<br>
-                      <form method="post" class="mt-2">
-                          {% csrf_token %}
-                          <input type="hidden" name="request_id" value="{{ request.id }}">
-                          <button class="btn btn-success" type="submit" name="action" value="approve">Approve</button>
-                          <button class="btn btn-danger" type="submit" name="action" value="reject">Reject</button>
-                      </form>
+        <!-- Navbar: Start -->
+        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+              <i class="bx bx-menu bx-sm"></i>
+            </a>
+          </div>
+          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <div class="navbar-nav align-items-center">
+              Trailer Management System
+            </div>
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <!-- Place this tag where you want the button to render. -->
+              <li class="nav-item lh-1 me-3">
+                <form method="post" action="{% url 'logout' %}">
+                  {% csrf_token %}
+                  <button class="btn btn-sm btn-outline-dark" type="submit">Logout</button>
+                </form>
+              </li>
+              <!-- User -->
+              <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                  <div class="avatar avatar-online">
+                    <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
                   </div>
-              {% endfor %}
-            
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                          <div class="avatar avatar-online">
+                            <img src="/static/src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                          </div>
+                        </div>
+                        <div class="flex-grow-1">
+                          <span class="fw-medium d-block">John Doe</span>
+                          <small class="text-muted">Admin</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="dropdown-divider"></div>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <i class="bx bx-user me-2"></i>
+                      <span class="align-middle">My Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <i class="bx bx-cog me-2"></i>
+                      <span class="align-middle">Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <span class="d-flex align-items-center align-middle">
+                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                        <span class="flex-grow-1 align-middle ms-1">Billing</span>
+                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="dropdown-divider"></div>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <i class="bx bx-power-off me-2"></i>
+                      <span class="align-middle">Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!--/ User -->
+            </ul>
           </div>
-        </div>
-        <div class="col-sm-5 text-center text-sm-left">
-          <div class="card-body pb-0 px-0 px-md-4">
-            <img src="/static/src/assets/img/illustrations/man-with-laptop-light.png" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-4 order-1">
-    <div class="row">
-      <div class="col-lg-6 col-md-12 col-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title d-flex align-items-start justify-content-between">
-              <div class="avatar flex-shrink-0">
-                <img src="/static/src/assets/img/icons/unicons/chart-success.png" alt="chart success" class="rounded">
-              </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+        </nav>
+        <!-- Navbar: End -->
+
+        <!-- Content wrapper: Start -->
+        <div class="content-wrapper">
+          <!-- Content: Start -->
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row">
+              <!-- Pending Renter Approval Section -->
+              <div class="col-lg-12 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Pending Renter Approval</h5>
+                    <div class="filters mb-3">
+                      <label for="filter-status" class="form-label">Filter by Status:</label>
+                      <select id="filter-status" class="form-select">
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                      </select>
+                    </div>
+                    <div class="search-bar mb-3">
+                      <label for="search-renter" class="form-label">Search Renter:</label>
+                      <input type="text" id="search-renter" class="form-control" placeholder="Search by name or company">
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Renter ID</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- Sample data -->
+                          <tr>
+                            <td>R001</td>
+                            <td>John Doe</td>
+                            <td>ABC Logistics</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                            <td>
+                              <button class="btn btn-sm btn-success">Approve</button>
+                              <button class="btn btn-sm btn-danger">Reject</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>R002</td>
+                            <td>Sarah Lee</td>
+                            <td>XYZ Freight</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                            <td>
+                              <button class="btn btn-sm btn-success">Approve</button>
+                              <button class="btn btn-sm btn-danger">Reject</button>
+                            </td>
+                          </tr>
+                          <!-- Backend data will be injected here -->
+                          {% for renter in pending_renters %}
+                          <tr>
+                            <td>{{ renter.id }}</td>
+                            <td>{{ renter.name }}</td>
+                            <td>{{ renter.company }}</td>
+                            <td><span class="badge bg-warning">{{ renter.status }}</span></td>
+                            <td>
+                              <button class="btn btn-sm btn-success">Approve</button>
+                              <button class="btn btn-sm btn-danger">Reject</button>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <span class="fw-medium d-block mb-1">Completed Trips</span>
-            <h3 class="card-title mb-2">72</h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-12 col-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title d-flex align-items-start justify-content-between">
-              <div class="avatar flex-shrink-0">
-                <img src="/static/src/assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded">
-              </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+              <!--/ Pending Renter Approval Section -->
+
+              <!-- Truck Availability Section -->
+              <div class="col-lg-12 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Truck Availability</h5>
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <strong>Truck ID:</strong> T1234<br>
+                        <strong>Status:</strong> Available<br>
+                        <strong>Location:</strong> New York, NY<br>
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Truck ID:</strong> T5678<br>
+                        <strong>Status:</strong> In Use<br>
+                        <strong>Location:</strong> Los Angeles, CA<br>
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Truck ID:</strong> T9101<br>
+                        <strong>Status:</strong> Available<br>
+                        <strong>Location:</strong> Chicago, IL<br>
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Truck ID:</strong> T1121<br>
+                        <strong>Status:</strong> Under Maintenance<br>
+                        <strong>Location:</strong> Houston, TX<br>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
+              <!--/ Truck Availability Section -->
+
+              <!-- Driver Details Section -->
+              <div class="col-lg-12 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Driver Details</h5>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Driver ID</th>
+                            <th>Name</th>
+                            <th>License</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- Sample data -->
+                          <tr>
+                            <td>D001</td>
+                            <td>Jane Smith</td>
+                            <td>C1234567</td>
+                            <td><span class="badge bg-success">Active</span></td>
+                          </tr>
+                          <tr>
+                            <td>D002</td>
+                            <td>Mike Johnson</td>
+                            <td>C7654321</td>
+                            <td><span class="badge bg-danger">Inactive</span></td>
+                          </tr>
+                          <tr>
+                            <td>D003</td>
+                            <td>Emily Davis</td>
+                            <td>C1122334</td>
+                            <td><span class="badge bg-success">Active</span></td>
+                          </tr>
+                          <!-- Backend data will be injected here -->
+                          {% for driver in drivers %}
+                          <tr>
+                            <td>{{ driver.id }}</td>
+                            <td>{{ driver.name }}</td>
+                            <td>{{ driver.license }}</td>
+                            <td><span class="badge bg-success">{{ driver.status }}</span></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/ Driver Details Section -->
+
+              <!-- Renter Details Section -->
+              <div class="col-lg-12 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Renter Details</h5>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Renter ID</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- Sample data -->
+                          <tr>
+                            <td>R001</td>
+                            <td>John Doe</td>
+                            <td>ABC Logistics</td>
+                            <td><span class="badge bg-success">Approved</span></td>
+                          </tr>
+                          <tr>
+                            <td>R002</td>
+                            <td>Sarah Lee</td>
+                            <td>XYZ Freight</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                          </tr>
+                          <tr>
+                            <td>R003</td>
+                            <td>Michael Brown</td>
+                            <td>Fast Transport</td>
+                            <td><span class="badge bg-success">Approved</span></td>
+                          </tr>
+                          <!-- Backend data will be injected here -->
+                          {% for renter in renters %}
+                          <tr>
+                            <td>{{ renter.id }}</td>
+                            <td>{{ renter.name }}</td>
+                            <td>{{ renter.company }}</td>
+                            <td><span class="badge bg-success">{{ renter.status }}</span></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/ Renter Details Section -->
+
             </div>
-            <span>Pending Requests</span>
-            <h3 class="card-title text-nowrap mb-1">30</h3>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Total Revenue -->
-  
-  <!--/ Total Revenue -->
-  <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-    <div class="row">
-      
-      <!-- </div>
-    <div class="row"> -->
-    </div>
-  </div>
-</div>
-<div class="row">
-  
-</div>
+          <!-- Content: End -->
 
-
-
-          </div>
-          <!-- / Content: End -->
-
-          
-          <!-- Footer: Start -->
           <footer class="content-footer footer bg-footer-theme">
-  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-    <div class="mb-2 mb-md-0">
-      © 2024 | Walmart
-    </div>
-    
-  </div>
-</footer>
-
-          <!-- Footer: End -->
+            <div class="container-xxl">
+              <div class="row py-4">
+                <!-- Footer Brand -->
+                <div class="col-lg-4 mb-3 mb-lg-0">
+                  <div class="footer-brand">
+                    <h5 class="text-primary">Walmart Logistics</h5>
+                    <p class="text-secondary">Efficient logistics solutions for a smarter tomorrow.</p>
+                  </div>
+                </div>
+                <!-- Footer Links -->
+                <div class="col-lg-4 mb-3 mb-lg-0">
+                  <h5 class="text-primary">Quick Links</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="javascript:void(0);" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="javascript:void(0);" class="footer-link">Terms of Service</a></li>
+                    <li><a href="javascript:void(0);" class="footer-link">About Us</a></li>
+                    <li><a href="javascript:void(0);" class="footer-link">Contact Us</a></li>
+                  </ul>
+                </div>
+                <!-- Footer Contact -->
+                <div class="col-lg-4 mb-3 mb-lg-0">
+                  <h5 class="text-primary">Contact Us</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="mailto:info@walmartlogistics.com" class="footer-link">info@walmartlogistics.com</a></li>
+                    <li><a href="tel:+1234567890" class="footer-link">+1 234 567 890</a></li>
+                  </ul>
+                  <div class="footer-social mt-2">
+                    <a href="https://www.facebook.com/" target="_blank" class="btn btn-icon btn-facebook">
+                      <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/" target="_blank" class="btn btn-icon btn-twitter">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/" target="_blank" class="btn btn-icon btn-linkedin">
+                      <i class="fab fa-linkedin-in"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-bottom text-center py-3">
+                <p class="text-muted mb-0">&copy; 2024 Walmart Logistics. All rights reserved.</p>
+              </div>
+            </div>
+          </footer>
+          
+          <!-- Font Awesome for icons -->
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+          
+          <!-- Custom Styles for Footer -->
+          <style>
+            .footer {
+              background: #f8f9fa; /* Light background color for contrast */
+              color: #212529; /* Dark text color for readability */
+            }
+            .footer-brand h5 {
+              margin-bottom: 10px;
+              font-size: 1.5rem;
+              font-weight: bold;
+              color: #007bff; /* Primary color */
+            }
+            .footer-brand p {
+              color: #6c757d; /* Secondary color */
+            }
+            .footer-link {
+              color: #007bff; /* Primary color */
+              text-decoration: none;
+            }
+            .footer-link:hover {
+              color: #0056b3; /* Darker shade on hover */
+              text-decoration: underline;
+            }
+            .btn-icon {
+              color: #ffffff;
+              background: none;
+              border: none;
+              font-size: 1.25rem;
+              margin-right: 10px;
+              transition: color 0.3s;
+            }
+            .btn-icon:hover {
+              color: #007bff;
+            }
+            .btn-facebook {
+              color: #3b5998;
+            }
+            .btn-twitter {
+              color: #1da1f2;
+            }
+            .btn-linkedin {
+              color: #0077b5;
+            }
+            .footer-bottom {
+              background: #e9ecef; /* Slightly darker background for the footer bottom */
+            }
+          </style>
           
 
-          <div class="content-backdrop fade"></div>
         </div>
-        <!--/ Content wrapper: End -->
+        <!-- Content wrapper: End -->
+
       </div>
-      <!-- / Layout page: End -->
+      <!-- Layout page: End -->
+
     </div>
-
-    
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-    
-    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-    <div class="drag-target"></div>
   </div>
-  <!-- Layout wrapper: End -->
-  
 
-    
+  <!-- Core JS -->
+  <script src="/static/src/assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="/static/src/assets/vendor/libs/popper/popper.js"></script>
+  <script src="/static/src/assets/vendor/js/bootstrap.js"></script>
 
-<!--Core Javascript-->
-<script src="/static/src/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="/static/src/assets/vendor/libs/popper/popper.js"></script>
-<script src="/static/src/assets/vendor/js/bootstrap.js"></script>
-<script src="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="/static/src/assets/vendor/js/menu.js"></script>
-<script src="/static/src/assets/js/main.js"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Vendor JS -->
+  <script src="/static/src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="/static/src/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
+  <!-- Page JS -->
+  <script src="/static/src/assets/js/main.js"></script>
+  <script>
+    // Example of filtering functionality for Pending Renter Approval
+    document.getElementById('filter-status').addEventListener('change', function() {
+      const status = this.value;
+      // Logic to filter table rows based on status
+    });
 
-    <!--Vendors Javascript-->
-    
- 
-<script src="/static/src/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-
-    <!--Page Javascript-->
-    
- 
-<script src="/static/src/assets/js/dashboards-analytics.js"></script>
-
-
-  </body>
+    // Example of search functionality for Pending Renter Approval
+    document.getElementById('search-renter').addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+      // Logic to filter table rows based on search query
+    });
+  </script>
+</body>
 
 </html>
